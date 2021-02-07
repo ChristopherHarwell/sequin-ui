@@ -4,10 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
+
+import { createStore, applyMiddleware } from "redux";
+// import { configureStore } from '@reduxjs/toolkit'
+
+import {cardsReducer} from "./state/reducers/index.js";
+
+const store = createStore(cardsReducer, applyMiddleware(thunk, logger))
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+      <App />
+  </Provider>,
   document.getElementById('root')
 );
 
